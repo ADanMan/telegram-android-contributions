@@ -1,0 +1,1 @@
+При работе с очередью багов, тестами на устройствах и upstream PR используй [public-bug-workbench](skills/public-bug-workbench/SKILL.md). Состояние работы восстанавливай из README.md, backlog.md и папки соответствующей карточки.
