@@ -64,7 +64,7 @@ Pixel 8 Pro (Android 17) и iQOO I2407 (Android 15). При двух подкл�
 
 ## Скилл
 
-Используйте [$public-bug-workbench](skills/public-bug-workbench/SKILL.md), чтобы продолжить работу с текущей карточки.
+Используйте [$contribute-project](https://github.com/ADanMan/open-source-contributions/tree/main/skills/contribute-project), чтобы продолжить работу с текущей карточки.
 
 ## Лицензия
 

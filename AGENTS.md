@@ -1,1 +1,1 @@
-При работе с очередью багов, тестами на устройствах и upstream PR используй [public-bug-workbench](skills/public-bug-workbench/SKILL.md). Состояние работы восстанавливай из README.md, backlog.md и папки соответствующей карточки.
+При работе с карточками и upstream PR используй [contribute-project](https://github.com/ADanMan/open-source-contributions/blob/main/skills/contribute-project/SKILL.md). Состояние работы восстанавливай из README.md, backlog.md и папки соответствующей карточки.
