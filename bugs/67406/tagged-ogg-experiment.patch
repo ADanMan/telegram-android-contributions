@@ -1,0 +1,57 @@
+--- a/TMessagesProj/src/main/java/org/telegram/messenger/SendMessagesHelper.java
++++ b/TMessagesProj/src/main/java/org/telegram/messenger/SendMessagesHelper.java
+@@ -24,6 +24,8 @@
+ import android.location.Location;
+ import android.location.LocationListener;
+ import android.location.LocationManager;
++import android.media.MediaExtractor;
++import android.media.MediaFormat;
+ import android.media.MediaMetadataRetriever;
+ import android.media.MediaPlayer;
+ import android.net.Uri;
+@@ -9501,6 +9503,7 @@
+         String permormer = null;
+         String title = null;
+         boolean isVoice = false;
++        String oggMimeType = "audio/ogg";
+         int duration = 0;
+         Bitmap cover = null;
+         if (extL.equals("mp3") || extL.equals("m4a")) {
+@@ -9529,8 +9532,26 @@
+                 if (art != null) {
+                     cover = BitmapFactory.decodeByteArray(art, 0, art.length);
+                 }
+-                if (editingMessageObject == null && extL.equals("ogg") && MediaController.isOpusFile(f.getAbsolutePath()) == 1) {
+-                    isVoice = true;
++                if (extL.equals("ogg")) {
++                    boolean opus = MediaController.isOpusFile(f.getAbsolutePath()) == 1;
++                    if (TextUtils.isEmpty(title) && TextUtils.isEmpty(permormer)) {
++                        isVoice = editingMessageObject == null && opus;
++                    } else if (opus) {
++                        oggMimeType = "audio/opus";
++                    } else {
++                        MediaExtractor extractor = new MediaExtractor();
++                        try {
++                            extractor.setDataSource(f.getAbsolutePath());
++                            for (int i = 0; i < extractor.getTrackCount(); i++) {
++                                if ("audio/vorbis".equals(extractor.getTrackFormat(i).getString(MediaFormat.KEY_MIME))) {
++                                    oggMimeType = "audio/ogg; codecs=vorbis";
++                                    break;
++                                }
++                            }
++                        } finally {
++                            extractor.release();
++                        }
++                    }
+                 }
+             } catch (Exception e) {
+                 FileLog.e(e);
+@@ -9618,7 +9639,7 @@
+                         document.mime_type = "audio/m4a";
+                         break;
+                     case "ogg":
+-                        document.mime_type = "audio/ogg";
++                        document.mime_type = oggMimeType;
+                         break;
+                     case "flac":
+                         document.mime_type = "audio/flac";
