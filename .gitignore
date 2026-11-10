@@ -1,0 +1,6 @@
+private/
+.env
+*.apk
+*.pftrace
+*.session
+.DS_Store
